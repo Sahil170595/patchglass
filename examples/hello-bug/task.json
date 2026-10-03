@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "hello-bug",
   "repo": "local://hello-bug",
-  "base_commit": "a8f781e9a0d5b6876fa4e737cd184bd5535d4e0e",
+  "base_commit": "d96bdf189bed553c36ced551d656742d050eb68c",
   "language": "python",
   "image": {
     "kind": "prebuilt",

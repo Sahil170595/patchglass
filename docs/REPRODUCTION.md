@@ -56,8 +56,11 @@ integration tests can skip when Docker or an image is absent. A green pytest exi
 skips is not a completed container qualification.
 
 Finance, path-check, and Go bundles each have their own `build.py`. `hello-bug-synthesis`
-shares hello-bug's image; if rebuilding changes the base commit, update its `base_commit`
-to the hello-bug bundle's generated commit before running it. Floating base tags and
+shares hello-bug's image; hello-bug's build helper captures its actual Git commit and
+updates both known bundle revisions together. It preserves their separate test settings
+and clears old image digests. The checked-in revision describes the normalized LF source
+tree; rebuilding always replaces it with the actual image revision. Host-side helper
+tests mock Docker calls and do not qualify container execution. Floating base tags and
 package repositories mean rebuilding images is not byte-identical reproduction.
 
 ## Inspect a run

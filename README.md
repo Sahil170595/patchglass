@@ -86,7 +86,9 @@ and `task diff <run_id> -b ...` to inspect the result.
 
 ### Generated-test lifecycle
 
-The synthesis bundle reuses the image built above.
+The synthesis bundle reuses the image built above. The hello-bug build helper
+synchronizes both bundles to the commit captured from that image, preserving their
+different grading contracts. No manual revision copy is needed.
 
 ```sh
 uv run task init -b examples/hello-bug-synthesis
