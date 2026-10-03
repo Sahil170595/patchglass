@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "id": "go-demo-pow",
+  "repo": "local://go-demo-pow",
+  "base_commit": "91c5c6be0810b3ba0a796654e122bdf0cbb7e0be",
+  "language": "go",
+  "domain": "swe",
+  "image": {
+    "kind": "prebuilt",
+    "ref": "taskbundle-go-demo-pow:1",
+    "workdir": "/app"
+  },
+  "test": {
+    "run_cmd": "go test ./mathx/ -v",
+    "parser": "go",
+    "selected_test_files": [
+      "mathx/pow_test.go"
+    ],
+    "hidden_source": "bundle-files"
+  },
+  "buckets": {
+    "pass2pass": [],
+    "fail2pass": [
+      "TestPow"
+    ]
+  },
+  "provenance": {
+    "source": "go-demo"
+  }
+}

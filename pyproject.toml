@@ -1,0 +1,70 @@
+[project]
+name = "taskbundle"
+version = "0.1.0"
+description = "Patchglass: container-based repair and test-synthesis evaluation with inspectable grading evidence."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+dependencies = [
+    "typer>=0.12",
+    "pydantic>=2.7",
+    "pydantic-settings>=2.3",
+    "docker>=7.1",
+]
+
+[project.optional-dependencies]
+# No SDKs needed: Ollama (local) and OpenAI are both called over stdlib urllib.
+dev = ["ruff>=0.6", "black>=24.8", "mypy>=1.11", "pytest>=8.3"]
+viz = ["gradio>=4"]  # optional, read-only run-explorer (tools/dashboard.py); not part of the core.
+
+[project.scripts]
+task = "taskbundle.cli:run_cli"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["taskbundle"]
+# Ship the seccomp profile in the wheel so an installed copy is not silently unconfined (the runtime
+# now fails loud if it is missing; this keeps it present). Lands at <site-packages>/seccomp/default.json,
+# which is where SECCOMP_PROFILE_PATH resolves.
+force-include = { "seccomp/default.json" = "seccomp/default.json", "THIRD_PARTY_NOTICES.md" = "seccomp/THIRD_PARTY_NOTICES.md", "licenses/Apache-2.0.txt" = "seccomp/licenses/Apache-2.0.txt" }
+
+[project.urls]
+Repository = "https://github.com/Sahil170595/patchglass"
+Issues = "https://github.com/Sahil170595/patchglass/issues"
+Portfolio = "https://chimeraforge.vercel.app/work"
+
+[tool.ruff]
+line-length = 120
+target-version = "py311"
+extend-exclude = ["examples"]  # synthetic fixture repos (intentionally buggy) — not our code.
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.black]
+line-length = 120
+target-version = ["py311"]
+extend-exclude = "examples"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+# SQL/data files live next to code; only type-check the package + tests.
+files = ["taskbundle", "tests"]
+# Synthetic example bundles ship per-task build.py scripts (duplicate module name "build"); exclude
+# them so a bare `mypy .` doesn't trip the duplicate-module check (they aren't our typed code).
+exclude = ["^examples/"]
+
+# Third-party libs without bundled type stubs.
+[[tool.mypy.overrides]]
+module = ["docker.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

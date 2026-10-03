@@ -1,0 +1,8 @@
+diff --git a/ledger/interest.py b/ledger/interest.py
+--- a/ledger/interest.py
++++ b/ledger/interest.py
+@@ -9,3 +9,3 @@
+ def compound_interest(principal: float, rate: float, years: int) -> float:
+     """Interest compounded annually: each year earns `rate` on the running balance."""
+-    return round(principal * (1 + rate * years), 2)
++    return round(principal * (1 + rate) ** years, 2)

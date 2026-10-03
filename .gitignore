@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+
+# Virtualenv / tooling caches
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+
+# Runtime state (never commit) — workspaces, artifacts, the DB, secrets
+.workspace/
+.taskbundle/
+artifacts/
+*.db
+*.sqlite3
+.env
+
+# OS
+.DS_Store
+Thumbs.db
+.release-test-tmp/
+.release-mypy/

@@ -1,0 +1,10 @@
+diff --git a/tests/test_syn.py b/tests/test_syn.py
+new file mode 100644
+--- /dev/null
++++ b/tests/test_syn.py
+@@ -0,0 +1,5 @@
++from widget.core import normalize
++
++
++def test_syn():
++    assert normalize("AB") == "ab"

@@ -1,0 +1,11 @@
+diff --git a/safeio/paths.py b/safeio/paths.py
+--- a/safeio/paths.py
++++ b/safeio/paths.py
+@@ -11,2 +11,6 @@ def safe_join(base_dir: str, user_path: str) -> str | None:
+     candidate = os.path.normpath(os.path.join(base_dir, user_path))
+-    return candidate
++    base = os.path.abspath(base_dir)
++    candidate = os.path.abspath(os.path.join(base, user_path))
++    if os.path.commonpath([base, candidate]) != base:
++        return None
++    return candidate

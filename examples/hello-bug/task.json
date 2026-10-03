@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "hello-bug",
+  "repo": "local://hello-bug",
+  "base_commit": "a8f781e9a0d5b6876fa4e737cd184bd5535d4e0e",
+  "language": "python",
+  "image": {
+    "kind": "prebuilt",
+    "ref": "taskbundle-hello-bug:1",
+    "workdir": "/app"
+  },
+  "test": {
+    "run_cmd": "python -m pytest {test_files} -rA -p no:cacheprovider",
+    "parser": "pytest",
+    "selected_test_files": [
+      "tests/test_lowercase.py",
+      "tests/test_strip_hidden.py"
+    ],
+    "hidden_source": "bundle-files"
+  },
+  "buckets": {
+    "pass2pass": [
+      "tests/test_strip_hidden.py::test_strips"
+    ],
+    "fail2pass": [
+      "tests/test_lowercase.py::test_lowercases"
+    ]
+  },
+  "provenance": {
+    "source": "synthetic"
+  }
+}

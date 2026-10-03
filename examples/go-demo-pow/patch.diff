@@ -1,0 +1,16 @@
+diff --git a/mathx/mathx.go b/mathx/mathx.go
+index 1ce72e1..d694c9b 100644
+--- a/mathx/mathx.go
++++ b/mathx/mathx.go
+@@ -6,9 +6,9 @@ package mathx
+ // BUG (baseline): this returns base*exp (repeated addition) instead of base**exp
+ // (repeated multiplication). The golden patch fixes it to true exponentiation.
+ func Pow(base, exp int) int {
+-	result := 0
++	result := 1
+ 	for i := 0; i < exp; i++ {
+-		result += base
++		result *= base
+ 	}
+ 	return result
+ }

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "finance-interest",
+  "repo": "local://finance-interest",
+  "base_commit": "a5a3359a63ac94f108fba5c53fb5dded67ead10e",
+  "language": "python",
+  "domain": "finance",
+  "image": {
+    "kind": "prebuilt",
+    "ref": "taskbundle-finance-interest:1",
+    "workdir": "/app"
+  },
+  "test": {
+    "run_cmd": "python -m pytest {test_files} -rA -p no:cacheprovider",
+    "parser": "pytest",
+    "selected_test_files": [
+      "tests/test_compound.py",
+      "tests/test_simple.py"
+    ],
+    "hidden_source": "bundle-files"
+  },
+  "buckets": {
+    "pass2pass": [
+      "tests/test_simple.py::test_simple_interest_unchanged"
+    ],
+    "fail2pass": [
+      "tests/test_compound.py::test_compounds_annually"
+    ]
+  },
+  "provenance": {
+    "source": "synthetic"
+  }
+}

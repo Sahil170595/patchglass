@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "id": "security-pathcheck",
+  "repo": "local://security-pathcheck",
+  "base_commit": "5c496dd2b853fd2f1f9ef0042afe2ef456d8df94",
+  "language": "python",
+  "domain": "security",
+  "image": {
+    "kind": "prebuilt",
+    "ref": "taskbundle-security-pathcheck:1",
+    "workdir": "/app"
+  },
+  "test": {
+    "run_cmd": "python -m pytest {test_files} -rA -p no:cacheprovider",
+    "parser": "pytest",
+    "selected_test_files": [
+      "tests/test_traversal.py",
+      "tests/test_allows.py"
+    ],
+    "hidden_source": "bundle-files"
+  },
+  "buckets": {
+    "pass2pass": [
+      "tests/test_allows.py::test_allows_nested_file"
+    ],
+    "fail2pass": [
+      "tests/test_traversal.py::test_rejects_path_traversal"
+    ]
+  },
+  "provenance": {
+    "source": "synthetic"
+  }
+}

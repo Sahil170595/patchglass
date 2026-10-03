@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# Unified diff context lines intentionally prefix tab-indented Go source with a space.
+*.diff whitespace=-space-before-tab
