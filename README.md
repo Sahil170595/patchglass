@@ -12,9 +12,9 @@ bundles are included here. This is the full source system, not a browser simulat
 [Security and support limits](SECURITY.md) | [Licenses](THIRD_PARTY_NOTICES.md)
 
 The [portfolio work page](https://chimeraforge.vercel.app/work) provides broader context.
-The separate [browser edition, PR 57](https://github.com/Sahil170595/Banterblogs/pull/57)
-is a draft pending integration and QA. It illustrates grading semantics; it does not
-execute this Docker harness or a live model and is not evidence of sandbox security.
+A separately authored [browser demo](https://chimeraforge.vercel.app/projects/reinforcement-learning/code-verification)
+illustrates the grading semantics on two small tasks. It does not execute this Docker
+harness or a live model and is not evidence of sandbox security.
 
 ## Architecture at a glance
 
